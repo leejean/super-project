@@ -1,0 +1,148 @@
+﻿商品修改
+gms_goods_update
+{
+	bis_type:1新增 2修改,
+	goods_id             Long      商品Id
+	data:
+	{
+		goods_name           String    商品名称
+		goods_code           String    商品编号
+		goods_brand_name     String    商品品牌名称
+		goods_stock          String    商品总库存
+		goods_img            String    商品轮播图列表
+		goods_main_img_url   String    商品主图
+		goods_desc_url       String    商品描述信息存储路径
+		goods_introduction   String    商品卖点
+		goods_caveats        String    注意事项
+		goods_status         String    商品状态 0下架 1上架(可用，不可用)
+		goods_weight         String    商品重量
+		goods_volume         String    商品体积
+		goods_sale_num       String    商品销量
+		goods_wholesale_price  String  商品批发价最低价
+		goods_sale_price       String  商品零售价最低价
+		goods_sale_total_price String  商品销售总价
+		goods_shipping       String    商品发货地
+		goods_gmt_create     String    商品创建时间
+		goods_gmt_modified   String    商品修改时间
+		category_path_id     String    类型ID(从一级到叶子的类目路径id按顺序用,隔开)
+		category_path        String    类型全路径
+		leaf_category_id     Long      叶子类目ID
+		leaf_category_name   String    叶子类目名称
+		supplier_name        String    提供商品的供应商名称
+		supplier_id          Long      提供商品的供应商Id
+		area_id              Long      供应商所在县域中心Id
+		unit_name            String    单位名称
+		is_counties_sale     String    是否县域零售 0 不是 1是 2不可用
+		is_counties_whole    String    是否县域批发 0 不是 1是 2不可用
+		is_nation_whole      String    是否全国批发代 0 不是 1是 2不可用
+		is_nation_sale       String    是否全国零售 0 不是 1是 2不可用
+		is_nation_sale_proxy String    是否全国零售代销 0 不是 1是 2不可用
+		basic_attribute_list String    基础信息列表{name:基础属性名称,val:基础属性值}
+		spec_name_list       String    规格信息列表[{id:规格Id,name:规格名称,values:[{id:规格值Id,val:规格值名称,img:规格图片}]}]
+		sku_list             String    sku列表 [{barCode:条形码,goodsId:商品Id,id:skuId,propertyDef:规格属性名_规格属性值T规格属性名_规格属性值,skuCode:规格编码,stock:库存,supplierId:供应商Id,warehouseId:仓库}]
+		tag_list             String    标签列表  [{bizId:平台Id,id:标签Id,isShow:是否显示(1显示，0不显示),tagName:标签名称}]
+		service_list         String    商品服务信息 [{id:服务Id,goodsId:商品Id,day:服务时间,token:说明:is_returnable是否支持退货，no_reason_return无理由退货，quality_return质量问题退货，quality_replace质量问题换货，quality_repair质量问题返修}]
+		retail_price_list	 String	   零售价格列表[{customize_area_id:自定义销售区域Id,biz_id:供应商Id,id:零售价格id,goods_id:商品Id,sku_id:规格Id,property_def:商品规格 属性_属性值T属性_属性值,area_id:所属县域Id,price:销售价,status:状态  0不可用 1可用,sale_type:销售模式(1:县域零售模式 2:全国零售模式 3:全国零售代销模式)}]
+		wholesale_price_list String    批发价格列表[{customize_area_id:自定义区域Id,biz_id:供应商Id,id:价格Id,goods_id:商品Id,has_update_price:是否允许修改价格,highest_price:最高价,jy_sale_price:建议零售价,lowest_price:最低价,setvalues:起订量:批发价:供货价,sku_id:规格Id,property_def:规格属性名_规格属性值T规格属性名_规格属性值,sale_type:销售模式(1:县域批发模式 2:全国批发代销模式)}]
+	}
+}
+
+商品库存、价格修改
+//库存修改
+gms_goods_info_update
+{
+	bis_type:1库存修改
+	goods_id:商品Id
+	data：
+	[{
+	goods_id 		Long      	商品Id
+	sku_id 			Long		SKUID
+	property_def 	String 		规格属性名_规格属性值T规格属性名_规格属性值
+	stock			Long 		数量
+	}]
+}
+
+//零售价格编辑
+gms_goods_info_update
+{
+	bis_type:2零售价格修改
+	goods_id:商品Id
+	data:[{customize_area_id:自定义销售区域Id,biz_id:供应商Id,id:零售价格id,goods_id:商品Id,sku_id:规格Id,property_def:商品规格 属性_属性值T属性_属性值,area_id:所属县域Id,price:销售价,status:状态  0不可用 1可用,sale_type:销售模式(1:县域零售模式 2:全国零售模式 3:全国零售代销模式)}]
+}
+
+//批发价格编辑
+gms_goods_info_update
+{
+	bis_type:3批发价格修改
+	goods_id:商品Id
+	data:[{customize_area_id:自定义区域Id,biz_id:供应商Id,id:价格Id,goods_id:商品Id,has_update_price:是否允许修改价格,highest_price:最高价,jy_sale_price:建议零售价,lowest_price:最低价,setvalues:起订量:批发价:供货价,sku_id:规格Id,property_def:规格属性名_规格属性值T规格属性名_规格属性值,sale_type:销售模式(1:县域批发模式 2:全国批发代销模式)}]
+}
+
+//标签修改
+gms_goods_info_update
+{
+	bis_type:4标签修改
+	goods_id:商品Id
+	data:[{bizId:平台Id,id:标签Id,isShow:是否显示(1显示，0不显示),tagName:标签名称}]
+}
+
+//名称修改
+gms_goods_info_update
+{
+	bis_type:4名称修改
+	goods_id:商品Id
+	data:商品名称
+}
+
+
+//商品状态修改
+gms_goods_status_update
+{
+	bis_type:1上架
+	goods_id:商品Id
+	data:
+	{
+		goods_type:0全部上架 1县域零售上架 2县域批发上架 3全国零售上架 4全国零售代销上架 5全国批发代销上架
+		retail_price_list	 String	   零售价格列表[{customize_area_id:自定义销售区域Id,biz_id:供应商Id,id:零售价格id,goods_id:商品Id,sku_id:规格Id,property_def:商品规格 属性_属性值T属性_属性值,area_id:所属县域Id,price:销售价,status:状态  0不可用 1可用,sale_type:销售模式(1:县域零售模式 2:全国零售模式 3:全国零售代销模式)}]
+		wholesale_price_list String    批发价格列表[{customize_area_id:自定义区域Id,biz_id:供应商Id,id:价格Id,goods_id:商品Id,has_update_price:是否允许修改价格,highest_price:最高价,jy_sale_price:建议零售价,lowest_price:最低价,setvalues:起订量:批发价:供货价,sku_id:规格Id,property_def:规格属性名_规格属性值T规格属性名_规格属性值,sale_type:销售模式(1:县域批发模式 2:全国批发代销模式)}]
+    }
+}
+
+//商品状态修改
+gms_goods_status_update
+{
+	bis_type:2下架
+	goods_id:商品Id
+	data:
+	{
+		goods_type:0全部下架 1县域零售下架 2县域批发下架 3全国零售下架 4全国零售代销下架 5全国批发代销下架
+		retail_price_list	 String	   零售价格列表[{customize_area_id:自定义销售区域Id,biz_id:供应商Id,id:零售价格id,goods_id:商品Id,sku_id:规格Id,property_def:商品规格 属性_属性值T属性_属性值,area_id:所属县域Id,price:销售价,status:状态  0不可用 1可用,sale_type:销售模式(1:县域零售模式 2:全国零售模式 3:全国零售代销模式)}]
+		wholesale_price_list String    批发价格列表[{customize_area_id:自定义区域Id,biz_id:供应商Id,id:价格Id,goods_id:商品Id,has_update_price:是否允许修改价格,highest_price:最高价,jy_sale_price:建议零售价,lowest_price:最低价,setvalues:起订量:批发价:供货价,sku_id:规格Id,property_def:规格属性名_规格属性值T规格属性名_规格属性值,sale_type:销售模式(1:县域批发模式 2:全国批发代销模式)}]
+    }
+}
+
+//商品状态修改
+gms_goods_status_update
+{
+	bis_type:3删除
+	goods_id:商品Id
+}
+
+//商品状态修改
+gms_goods_status_update
+{
+	bis_type:4冻结
+	goods_id:商品Id
+}
+
+
+
+
+商家：
+//县域信息
+bis_area_update
+{
+	bis_type:1新增 2修改 3:冻结 4:删除
+	area_id:县域ID
+	area_name:县域名称	
+}

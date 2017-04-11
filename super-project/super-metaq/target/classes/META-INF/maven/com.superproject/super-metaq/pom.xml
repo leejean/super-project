@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.superproject</groupId>
+    <artifactId>super-project</artifactId>
+    <version>${project.version}</version>
+  </parent>
+  <artifactId>super-metaq</artifactId>
+  <name>super-metaq</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    	<!-- https://mvnrepository.com/artifact/com.taobao.metamorphosis/metamorphosis-client -->
+		<dependency>
+		    <groupId>com.taobao.metamorphosis</groupId>
+		    <artifactId>metamorphosis-client</artifactId>
+		    <version>1.4.6.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.taobao.metamorphosis/metamorphosis-server -->
+		<dependency>
+		    <groupId>com.taobao.metamorphosis</groupId>
+		    <artifactId>metamorphosis-server</artifactId>
+		    <version>1.4.6.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.taobao.metamorphosis/metamorphosis-commons -->
+		<dependency>
+		    <groupId>com.taobao.metamorphosis</groupId>
+		    <artifactId>metamorphosis-commons</artifactId>
+		    <version>1.4.6.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.taobao.metamorphosis</groupId>
+			<artifactId>metamorphosis-client-extension</artifactId>
+			<version>1.4.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.taobao.metamorphosis</groupId>
+			<artifactId>storm-metamorphosis-spout</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba.rocketmq/rocketmq-client -->
+		<dependency>
+		    <groupId>com.alibaba.rocketmq</groupId>
+		    <artifactId>rocketmq-client</artifactId>
+		    <version>3.2.6</version>
+		</dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       >
+	<!-- 消息订阅与消费 -->
+	
+	<!-- 广播消息处理 -->
+    <bean id="baseMQListener" class="com.superproject.rocket.base.listener.BaseMQListener"/>
+    
+    <bean id="rkMQConsumer" class="com.superproject.rocket.base.consumer.RocketMQConsumer" init-method="init" >
+        <property name="consumerType" value="BROADCASTING" />
+        <property name="rocketMQListener" ref="baseMQListener"/>
+        <property name="consumerGroupName" value="mcp-mq-consumer"/>
+        <!-- 自行配置：mq地址 -->
+        <property name="rocketMQUrl" value="192.168.231.130:9876" />
+        <!-- 自行配置：消费的主题多个则逗号隔开 -->
+        <property name="topic" value="gms_goods_update,gms_goods_info_update,gms_goods_status_update"/>
+    </bean>	
+    
+    <bean id="gmsMessageListener" class="com.superproject.rocket.gms.GmsMessageListener"/>
+    
+</beans>

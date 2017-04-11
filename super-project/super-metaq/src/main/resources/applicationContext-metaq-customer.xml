@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+
+    <bean id="messageSessionFactory"
+          class="com.taobao.metamorphosis.client.extension.spring.MetaqMessageSessionFactoryBean">
+        <property name="zkConnect" value="120.25.152.126:2181"/>
+        <property name="zkSessionTimeoutMs" value="50000"/>
+        <property name="zkConnectionTimeoutMs" value="30000"/>
+        <property name="zkSyncTimeMs" value="5000"/>
+    </bean>
+
+    <bean id="messageBodyConverter"
+          class="com.taobao.metamorphosis.client.extension.spring.JavaSerializationMessageBodyConverter"/>
+
+    <bean id="metaqTemplate"
+          class="com.taobao.metamorphosis.client.extension.spring.MetaqTemplate">
+        <property name="messageSessionFactory" ref="messageSessionFactory"/>
+        <property name="messageBodyConverter" ref="messageBodyConverter"/>
+    </bean>
+
+    <bean id="superTopic"
+          class="com.taobao.metamorphosis.client.extension.spring.MetaqTopic">
+        <property name="group" value="super-topic-client"/>
+        <property name="topic" value="super-topic"/>
+        <property name="maxBufferSize" value="102400"/>
+    </bean>
+	<!-- <bean id="oneToOneTopic"
+	          class="com.taobao.metamorphosis.client.extension.spring.MetaqTopic">
+	        <property name="group" value="super-topic-client"/>
+	        <property name="topic" value="one-to-one"/>
+	        <property name="maxBufferSize" value="102400"/>
+	</bean> -->
+    <bean id="dateMessageListener" class="com.superproject.metaq.DateMessageListener">
+        <property name="processThreads" value="1"/>
+    </bean>
+     <bean id="monitorLog" class="com.taobao.metamorphosis.utils.monitor.MonitorLog">
+    </bean>
+
+    <bean id="listenerContainer"
+          class="com.taobao.metamorphosis.client.extension.spring.MessageListenerContainer">
+        <property name="messageSessionFactory" ref="messageSessionFactory"/>
+        <property name="messageBodyConverter" ref="messageBodyConverter"/>
+        <property name="subscribers">
+            <map>
+                <entry key-ref="superTopic" value-ref="dateMessageListener"/>
+                <!-- <entry key-ref="oneToOneTopic" value-ref="dateMessageListener"/> -->
+            </map>
+        </property>
+    </bean>
+
+
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.superproject</groupId>
+    <artifactId>super-project</artifactId>
+    <version>${project.version}</version>
+  </parent>
+  <artifactId>super-lts</artifactId>
+  <name>super-lts</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    	<!-- https://mvnrepository.com/artifact/com.github.ltsopensource/lts-core -->
+		<dependency>
+		    <groupId>com.github.ltsopensource</groupId>
+		    <artifactId>lts-core</artifactId>
+		    <version>1.6.8</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.ltsopensource/lts-jobtracker -->
+		<dependency>
+		    <groupId>com.github.ltsopensource</groupId>
+		    <artifactId>lts-jobtracker</artifactId>
+		    <version>1.6.8</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.ltsopensource/lts-monitor -->
+		<dependency>
+		    <groupId>com.github.ltsopensource</groupId>
+		    <artifactId>lts-monitor</artifactId>
+		    <version>1.6.8</version>
+		</dependency>
+  </dependencies>
+</project>
